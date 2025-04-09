@@ -39,14 +39,15 @@ export const mainLayoutRoutes: TRoutes[] = [
     path: "/cart",
     element: <Cart />,
   },
-  {
-    name: "Login",
-    path: "/login",
-    element: <Login />,
-  },
+
   {
     name: "PlaceOrder",
     path: "/place-order",
     element: <PlaceOrder />,
+  },
+  {
+    name: "Login",
+    path: "/login",
+    element: <Login />,
   },
 ];
