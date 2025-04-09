@@ -4,6 +4,7 @@ import Collection from "@/pages/Collection";
 import Contact from "@/pages/Contact";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
+
 import PlaceOrder from "@/pages/PlaceOrder";
 import Product from "@/pages/Product";
 import { TRoutes } from "@/types/routes";
@@ -51,3 +52,6 @@ export const mainLayoutRoutes: TRoutes[] = [
     element: <Login />,
   },
 ];
+export const mainLayoutRoutesWithoutLogin = mainLayoutRoutes.filter(
+  (item) => item.path !== "/login"
+);

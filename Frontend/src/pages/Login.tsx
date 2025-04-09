@@ -1,10 +1,9 @@
-
 const Login = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <div>
+      <p>Please login</p>
+    </div>
+  );
 };
 
 export default Login;
