@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 import { cn } from "@/lib/utils";
@@ -20,19 +19,19 @@ const Sidebar = ({
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <EButton variant="ghost" size="icon">
           <Menu className="text-white" />
-        </Button>
+        </EButton>
       </SheetTrigger>
-      <SheetContent side={side} className="bg-gray-900 text-white">
-        <div className="flex flex-col space-y-4 mt-8">
+      <SheetContent side={side} className="bg-primary text-white">
+        <div className="flex flex-col px-6 space-y-4 mt-8">
           {routes.map((route, index) => (
             <NavLink
               key={index}
               onClick={handleClose}
               className={({ isActive, isPending }) =>
                 cn(
-                  "text-black",
+                  "text-white",
                   isActive && "text-blue-500",
                   isPending && "opacity-50"
                 )

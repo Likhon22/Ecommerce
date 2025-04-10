@@ -8,9 +8,9 @@ const NavbarMobile = () => {
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   return (
-    <div className=" bg-black">
-      <Container maxWidth="sm">
-        <div className="flex items-center justify-between">
+    <div className="bg-primary">
+      <Container>
+        <div className="flex items-center  justify-between w-full">
           <Link to="/" className="text-2xl font-bold text-white">
             EasyWear
           </Link>

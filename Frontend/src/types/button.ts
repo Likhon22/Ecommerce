@@ -9,7 +9,7 @@ export type ButtonProps = {
     | "outline"
     | "secondary"
     | "ghost";
-  size?: "default" | "sm" | "lg" | "icon";
+  size?: "default" | "sm" | "lg" | "icon" | null | undefined;
   fullWidth?: boolean;
   icon?: ReactNode;
   iconPosition?: "left" | "right";

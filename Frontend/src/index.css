@@ -43,6 +43,8 @@
 }
 @theme {
   --font-poppins: "Poppins", sans-serif;
+  --color-primary: #374151;
+  --color-secondary: #6b7280;
 }
 
 :root {

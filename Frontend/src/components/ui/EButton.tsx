@@ -19,7 +19,7 @@ const EButton = ({
   ...props
 }: ButtonProps) => {
   const defaultStyles =
-    "bg-gray-950 text-white transition hover:scale-105 duration-300";
+    "bg-gray-950 text-white cursor-pointer transition hover:scale-105 duration-300";
 
   const buttonStyle = cn(
     defaultStyles,

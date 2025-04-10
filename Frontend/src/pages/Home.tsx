@@ -1,7 +1,11 @@
+import Hero from "@/components/Home/Hero/Hero";
+import LatestCollection from "@/components/Home/latestCollection/LatestCollection";
+
 const Home = () => {
   return (
     <div>
-      <p>Home</p>
+      <Hero />
+      <LatestCollection />
     </div>
   );
 };

@@ -11,9 +11,9 @@ import Container from "../../layout/container/Container";
 
 const NavbarDesktop = () => {
   return (
-    <Container maxWidth="lg">
+    <Container>
       <div className="flex items-center justify-between w-full space-x-3  ">
-        <Link to="/" className="text-2xl font-bold text-black">
+        <Link to="/" className="text-2xl font-bold text-primary">
           EasyWear
         </Link>
         <NavigationMenu>
@@ -24,7 +24,7 @@ const NavbarDesktop = () => {
                   to={route.path}
                   className={({ isActive, isPending }) =>
                     cn(
-                      "relative inline-block px-1 text-black transition-colors duration-300",
+                      "relative inline-block px-1 text-primary font-medium  transition-colors duration-300",
                       "after:content-[''] after:absolute after:left-1 after:bottom-0 after:h-[1px] after:bg-gray-900 after:transition-all after:duration-300 after:ease-in-out",
                       "hover:after:w-3/4",
 
@@ -41,8 +41,8 @@ const NavbarDesktop = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <EButton>
-          <Link to="/login" className="font-bold">
+        <EButton className="bg-primary">
+          <Link to="/login" className="font-bold ">
             Login
           </Link>
         </EButton>
