@@ -11,6 +11,7 @@ type HeadingProps = {
   fondWidth?: string;
   firstTextClassName?: string;
   secondTextClassName?: string;
+  subSectionText?: string;
 };
 
 const HeadingSection = ({
@@ -19,30 +20,36 @@ const HeadingSection = ({
   firstTextColor = "secondary",
   secondTextColor = "primary",
   borderWidth = "8",
-  borderHeight = "2px",
+
   firstTextClassName = "string",
   secondTextClassName = "string",
   fondWidth = "semibold",
+  subSectionText,
 }: HeadingProps) => {
   return (
-    <div className="flex items-center justify-center space-x-2">
-      <h2
-        className={cn(
-          `text-2xl font-${fondWidth} text-${firstTextColor}`,
-          firstTextClassName
-        )}
-      >
-        {firstText}
-      </h2>
-      <h2
-        className={cn(
-          `text-2xl font-${fondWidth} text-${secondTextColor}`,
-          secondTextClassName
-        )}
-      >
-        {secondText}
-      </h2>
-      <p className={`w-${borderWidth} bg-primary h-[${borderHeight}]`}></p>
+    <div className="flex justify-center items-center flex-col gap-2">
+      <div className="flex items-center  gap-2">
+        <h2
+          className={cn(
+            `text-2xl font-${fondWidth} text-${firstTextColor}`,
+            firstTextClassName
+          )}
+        >
+          {firstText}
+        </h2>
+        <h2
+          className={cn(
+            `text-2xl font-${fondWidth} text-${secondTextColor}`,
+            secondTextClassName
+          )}
+        >
+          {secondText}
+        </h2>
+        <p className={`w-${borderWidth} bg-primary h-[2px]`}></p>
+      </div>
+      {subSectionText && (
+        <p className="text-center text-secondary">{subSectionText}</p>
+      )}
     </div>
   );
 };
