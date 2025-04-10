@@ -4,7 +4,7 @@ import NavbarMobile from "./NavbarMobile";
 const Navbar = () => {
   return (
     <nav>
-      <div className="hidden md:block">
+      <div className="hidden md:block py-2 ">
         <NavbarDesktop />
       </div>
       <div className="md:hidden">
