@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { mainLayoutRoutesWithoutLogin } from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import {
@@ -7,6 +6,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Link, NavLink } from "react-router-dom";
+import EButton from "@/components/ui/EButton";
 
 const NavbarDesktop = () => {
   return (
@@ -18,8 +18,7 @@ const NavbarDesktop = () => {
         <NavigationMenuList className="flex space-x-4">
           {mainLayoutRoutesWithoutLogin.map((route, index) => (
             <NavigationMenuItem key={index}>
-                  <NavLink
-                      
+              <NavLink
                 className={({ isActive, isPending }) =>
                   cn(
                     "text-black",
@@ -35,11 +34,12 @@ const NavbarDesktop = () => {
           ))}
         </NavigationMenuList>
       </NavigationMenu>
-      <Button>
+
+      <EButton>
         <Link to="/login" className="font-bold">
           Login
         </Link>
-      </Button>
+      </EButton>
     </div>
   );
 };

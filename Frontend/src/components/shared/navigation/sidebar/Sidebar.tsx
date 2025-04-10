@@ -6,6 +6,7 @@ import { Menu } from "lucide-react";
 
 import { Link, NavLink } from "react-router-dom";
 import { SidebarProps } from "@/types/sidebar";
+import EButton from "@/components/ui/EButton";
 
 const Sidebar = ({
   open,
@@ -43,15 +44,13 @@ const Sidebar = ({
           ))}
           {showLoginButton && (
             <div className="mt-auto pt-4 border-t border-gray-700">
-              <Button
-                variant="outline"
-                className="w-full text-black border-white hover:bg-white hover:text-gray-900"
+              <EButton
                 onClick={() => {
                   handleClose();
                 }}
               >
                 <Link to="/login">Login</Link>
-              </Button>
+              </EButton>
             </div>
           )}
         </div>
