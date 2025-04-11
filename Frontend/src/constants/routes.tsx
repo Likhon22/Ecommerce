@@ -1,4 +1,6 @@
 import About from "@/pages/About";
+import AddProduct from "@/pages/adminDashboard/AddProduct";
+import AdminHome from "@/pages/adminDashboard/AdminHome";
 import Cart from "@/pages/Cart";
 import Collection from "@/pages/Collection";
 import Contact from "@/pages/Contact";
@@ -40,6 +42,11 @@ export const mainLayoutRoutes: TRoutes[] = [
     path: "/cart",
     element: <Cart />,
   },
+  {
+    name: "Dashboard",
+    path: "/admin-dashboard/admin-home",
+    element: <AdminHome />,
+  },
 
   {
     name: "PlaceOrder",
@@ -50,6 +57,18 @@ export const mainLayoutRoutes: TRoutes[] = [
     name: "Login",
     path: "/login",
     element: <Login />,
+  },
+];
+export const adminLayoutRoutes: TRoutes[] = [
+  {
+    name: "Admin Home",
+    path: "/admin-dashboard/admin-home",
+    element: <AdminHome />,
+  },
+  {
+    name: "Add Product",
+    path: "/admin-dashboard/add-product",
+    element: <AddProduct />,
   },
 ];
 export const mainLayoutRoutesWithoutLogin = mainLayoutRoutes.filter(

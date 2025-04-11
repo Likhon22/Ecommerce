@@ -1,15 +1,21 @@
 import { currency } from "@/constants/product";
 import { TProduct } from "@/types/products";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }: { product: TProduct }) => {
   return (
-    <div>
+    <Link
+      to={`/product/${product._id}`}
+      className="flex flex-col gap-1 cursor-pointer"
+    >
       {product.image.length > 0 && (
-        <img
-          className="transition duration-300 ease-in-out hover:scale-105 "
-          src={product.image[0]}
-          alt=""
-        />
+        <div className="overflow-hidden">
+          <img
+            className="transition ease-in-out hover:scale-105 "
+            src={product.image[0]}
+            alt={product.name}
+          />
+        </div>
       )}
       <p className="text-xs text-secondary">{product.name}</p>
       <p className="text-xs text-primary font-medium">
@@ -17,7 +23,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
         {currency}
         {product.price}
       </p>
-    </div>
+    </Link>
   );
 };
 
