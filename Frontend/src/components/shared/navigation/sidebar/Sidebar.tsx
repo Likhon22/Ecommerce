@@ -19,9 +19,9 @@ const Sidebar = ({
       {/* Mobile Sidebar (Sheet) */}
       <div className="md:hidden">
         <Sheet open={open} onOpenChange={onOpenChange}>
-          <SheetTrigger asChild>
+          <SheetTrigger className="m-2" asChild>
             <EButton variant="ghost" size="icon">
-              <Menu className="text-white" />
+              <Menu className="text-white " />
             </EButton>
           </SheetTrigger>
           <SheetContent side={side} className="bg-primary text-white">
