@@ -3,33 +3,44 @@ import { ChangeEvent } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 type EFileInputProps = {
-  images: string[];
-  setImages: (images: string[]) => void;
+  images: File[];
+  previewUrls: string[];
+  setImages: (images: File[]) => void;
+  setPreviewUrls: (urls: string[]) => void;
   label?: string;
 };
 
 const EFileInput = ({
   images,
+  previewUrls,
   setImages,
+  setPreviewUrls,
   label = "Images",
 }: EFileInputProps) => {
   const { control, setValue } = useFormContext();
 
+  // Handle file selection and store the actual File objects
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
-      const fileArray = Array.from(files).map((file) =>
-        URL.createObjectURL(file)
+      const fileArray = Array.from(files); // Store the actual File objects
+      const newPreviewUrls = fileArray.map(
+        (file) => URL.createObjectURL(file) // Generate the preview URLs
       );
-      const newImages = [...images, ...fileArray];
-      setImages(newImages);
-      setValue("images", newImages); // Update form value
+      setImages([...images, ...fileArray]);
+      setPreviewUrls([...previewUrls, ...newPreviewUrls]);
+      setValue("images", [...images, ...fileArray]);
     }
   };
+
+  // Remove the selected file and its preview
   const removeImages = (index: number) => {
     const newImages = [...images];
+    const newPreviewUrls = [...previewUrls];
     newImages.splice(index, 1);
+    newPreviewUrls.splice(index, 1);
     setImages(newImages);
+    setPreviewUrls(newPreviewUrls);
     setValue("images", newImages);
   };
 
@@ -50,8 +61,13 @@ const EFileInput = ({
                 type="file"
                 multiple
                 onChange={(e) => {
-                  handleFileChange(e);
-                  field.onChange(images);
+                  const files = e.target.files;
+                  if (files) {
+                    const fileArray = Array.from(files);
+                    handleFileChange(e);
+                    const combinedFiles = [...images, ...fileArray];
+                    field.onChange(combinedFiles);
+                  }
                 }}
                 accept="image/*"
                 className="w-full text-sm file:mr-4 file:py-2.5 file:px-5 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-blue-600 file:text-white hover:file:bg-blue-700 transition-colors cursor-pointer"
@@ -63,15 +79,15 @@ const EFileInput = ({
 
             {images.length > 0 && (
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
-                {images.map((image, index) => (
+                {previewUrls.map((previewUrl, index) => (
                   <div key={index} className="relative group">
                     <X
                       size={15}
-                      className="absolute  top-1 right-1 transition duration-150  hover:scale-110 cursor-pointer"
+                      className="absolute top-1 right-1 transition duration-150 hover:scale-110 cursor-pointer"
                       onClick={() => removeImages(index)}
                     />
                     <img
-                      src={image}
+                      src={previewUrl} // Display preview using the generated URL
                       alt={`Preview ${index}`}
                       className="h-24 w-full object-cover rounded-md"
                     />

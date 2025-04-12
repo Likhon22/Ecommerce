@@ -12,13 +12,10 @@ import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const AddProduct = () => {
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<File[]>([]);
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const productData = {
-      ...data,
-      images: images,
-    };
-    console.log(productData);
+    console.log(data);
   };
 
   return (
@@ -35,7 +32,7 @@ const AddProduct = () => {
       <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-100">
         <EForm
           className="space-y-6"
-          resolver={productSchema}
+          // resolver={productSchema}
           onsubmit={handleSubmit}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -47,7 +44,9 @@ const AddProduct = () => {
             />
             <EFileInput
               images={images}
+              previewUrls={previewUrls}
               setImages={setImages}
+              setPreviewUrls={setPreviewUrls}
               label="Product Images"
             />
           </div>

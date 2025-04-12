@@ -13,7 +13,9 @@ const sizeSchema = z.object({
 export const productSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
 
-  images: z.array(z.string()),
+  images: z.array(z.instanceof(File)).min(1, {
+    message: "At least one image is required",
+  }),
 
   category: z.enum(["men", "women", "kids", "unisex"]),
 
