@@ -3,7 +3,7 @@ import { z } from "zod";
 const colorsSchema = z.object({
   name: z.string(),
   hex: z.string(),
-  images: z.array(z.string()).optional(),
+  images: z.array(z.instanceof(File)).optional(),
 });
 const sizeSchema = z.object({
   id: z.number(),

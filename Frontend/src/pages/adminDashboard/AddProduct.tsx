@@ -32,7 +32,7 @@ const AddProduct = () => {
       <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-100">
         <EForm
           className="space-y-6"
-          // resolver={productSchema}
+          resolver={productSchema}
           onsubmit={handleSubmit}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

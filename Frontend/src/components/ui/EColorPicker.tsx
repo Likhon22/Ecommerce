@@ -8,7 +8,7 @@ import { X, Upload, XIcon } from "lucide-react";
 type ColorData = {
   name: string;
   hex: string;
-  images?: string[];
+  images?: File[];
 };
 
 type EColorPickerProps = {
@@ -24,6 +24,7 @@ const EColorPicker = ({ name, label, required = true }: EColorPickerProps) => {
   } = useFormContext();
   const [colorName, setColorName] = useState("");
   const [tempImages, setTempImages] = useState<string[]>([]);
+  const [fileImages, setFileImages] = useState<File[]>([]);
   const [open, setOpen] = useState(false);
 
   const error = errors[name];
@@ -53,8 +54,8 @@ const EColorPicker = ({ name, label, required = true }: EColorPickerProps) => {
                 : "#000000",
             };
 
-            if (tempImages.length > 0) {
-              newColor.images = [...tempImages];
+            if (fileImages.length > 0) {
+              newColor.images = [...fileImages];
             }
 
             field.onChange([...colors, newColor]);
@@ -62,6 +63,7 @@ const EColorPicker = ({ name, label, required = true }: EColorPickerProps) => {
             // Reset inputs
             setColorName("");
             setTempImages([]);
+            setFileImages([]);
           };
 
           const removeColor = (index: number) => {
@@ -71,14 +73,22 @@ const EColorPicker = ({ name, label, required = true }: EColorPickerProps) => {
           };
 
           const handleImageUpload = (files: FileList) => {
-            const newImages = Array.from(files).map((file) =>
+            if (!files.length) return;
+            const newFileImages = Array.from(files);
+            setFileImages([...fileImages, ...newFileImages]);
+            const newPreviewUrls = Array.from(files).map((file) =>
               URL.createObjectURL(file)
             );
-            setTempImages([...tempImages, ...newImages]);
+            setTempImages([...tempImages, ...newPreviewUrls]);
           };
 
           const removeImage = (index: number) => {
-            setTempImages(tempImages.filter((_, i) => i !== index));
+            const newTempImages = [...tempImages];
+            const newFileImages = [...fileImages];
+            newTempImages.splice(index, 1);
+            newFileImages.splice(index, 1);
+            setTempImages(newTempImages);
+            setFileImages(newFileImages);
           };
 
           return (
