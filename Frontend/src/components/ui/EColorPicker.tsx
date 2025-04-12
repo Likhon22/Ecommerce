@@ -23,6 +23,7 @@ const EColorPicker = ({ name, label, required = true }: EColorPickerProps) => {
     formState: { errors },
   } = useFormContext();
   const [colorName, setColorName] = useState("");
+  const [colorValue, setColorValue] = useState("#000000");
   const [tempImages, setTempImages] = useState<string[]>([]);
   const [fileImages, setFileImages] = useState<File[]>([]);
   const [open, setOpen] = useState(false);
@@ -42,16 +43,11 @@ const EColorPicker = ({ name, label, required = true }: EColorPickerProps) => {
 
           const addColor = () => {
             if (!colorName.trim()) return;
+            console.log(colorValue);
 
             const newColor: ColorData = {
               name: colorName,
-              hex: document.getElementById(`color-picker-${name}`)
-                ? (
-                    document.getElementById(
-                      `color-picker-${name}`
-                    ) as HTMLInputElement
-                  ).value
-                : "#000000",
+              hex: colorValue,
             };
 
             if (fileImages.length > 0) {
@@ -60,10 +56,10 @@ const EColorPicker = ({ name, label, required = true }: EColorPickerProps) => {
 
             field.onChange([...colors, newColor]);
 
-            // Reset inputs
             setColorName("");
             setTempImages([]);
             setFileImages([]);
+            setColorValue("#000000");
           };
 
           const removeColor = (index: number) => {
@@ -132,7 +128,7 @@ const EColorPicker = ({ name, label, required = true }: EColorPickerProps) => {
                         <Input
                           value={colorName}
                           onChange={(e) => setColorName(e.target.value)}
-                          placeholder="e.g. Blue"
+                          placeholder="e.g. Black"
                         />
                       </div>
                       <div>
@@ -142,8 +138,10 @@ const EColorPicker = ({ name, label, required = true }: EColorPickerProps) => {
                         <input
                           id={`color-picker-${name}`}
                           type="color"
+                          value={colorValue}
                           defaultValue="#3b82f6"
                           className="h-9 w-10 cursor-pointer rounded border"
+                          onChange={(e) => setColorValue(e.target.value)}
                         />
                       </div>
                     </div>
