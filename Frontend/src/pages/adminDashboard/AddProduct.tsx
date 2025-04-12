@@ -8,6 +8,8 @@ import ESelect from "@/components/ui/ESelect";
 
 import { categoryOptions, sizeOptions } from "@/constants/product";
 import { productSchema } from "@/schemas/productSchema";
+import formatCloudinaryResponse from "@/utils/formatCloudinaryResponse ";
+import { uploadImages } from "@/utils/uploadImage";
 import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
@@ -16,6 +18,19 @@ const AddProduct = () => {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
+    const { images } = data;
+    const uploadImagesCloudinary = await uploadImages(images);
+
+    const validImages = uploadImagesCloudinary.filter(
+      (img): img is { secure_url: string; public_id: string } => img !== null
+    );
+
+    const formattedImages = formatCloudinaryResponse(validImages);
+    const productData = {
+      ...data,
+      images: formattedImages,
+    };
+    console.log("Product Data:", productData);
   };
 
   return (

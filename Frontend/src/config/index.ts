@@ -1,9 +1,6 @@
-import "dotenv/config";
-const { CLOUD_NAME, UPLOAD_PRESET } = process.env;
-
 export const config = {
   cloudinary: {
-    cloudName: CLOUD_NAME,
-    uploadPreset: UPLOAD_PRESET,
+    cloudName: import.meta.env.VITE_CLOUD_NAME,
+    uploadPreset: import.meta.env.VITE_UPLOAD_PRESET,
   },
 };
