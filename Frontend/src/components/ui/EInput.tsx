@@ -9,6 +9,7 @@ type InputProps = {
   required?: boolean;
   className?: string;
   label?: string;
+  multiple?: boolean;
 };
 
 const EInput = ({
@@ -18,6 +19,7 @@ const EInput = ({
   required = true,
   className,
   label,
+  multiple = false,
 }: InputProps) => {
   const {
     control,
@@ -40,8 +42,19 @@ const EInput = ({
         render={({ field }) => (
           <Input
             {...field}
+            multiple={type === "file" ? multiple : undefined}
             type={type}
             placeholder={placeholder}
+            onChange={(e) => {
+              let value;
+              if (type === "number") {
+                value =
+                  e.target.value === "" ? null : parseFloat(e.target.value);
+              } else {
+                value = e.target.value;
+              }
+              field.onChange(value);
+            }}
             className={cn(
               hasError && "border-red-500 ring-red-500/20",
               className

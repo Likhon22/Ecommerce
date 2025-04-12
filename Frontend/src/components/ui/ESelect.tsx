@@ -42,7 +42,9 @@ const ESelect = ({
         render={({ field }) => (
           <Select onValueChange={field.onChange} value={field.value}>
             <SelectTrigger
-              className={hasError ? "border-red-500 ring-red-500/20" : ""}
+              className={`w-68 min-h-10 ${
+                hasError ? "border-red-500 ring-red-500/20" : ""
+              }`}
             >
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>

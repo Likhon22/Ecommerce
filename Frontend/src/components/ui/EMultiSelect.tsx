@@ -43,7 +43,11 @@ const EMultiSelect = ({
           return (
             <Popover>
               <PopoverTrigger>
-                <Button type="button" className="cursor-pointer">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-68 justify-between font-normal capitalize min-h-10"
+                >
                   {selected.length > 0
                     ? selected.length > 2
                       ? `${selected.length} options selected`
@@ -69,12 +73,11 @@ const EMultiSelect = ({
                               : selected.filter(
                                   (item: Option) => item.id !== option.id
                                 );
+
                             field.onChange(newValue);
                           }}
                         />
-                        <span className="capitalize text-sm">
-                          {option.name}
-                        </span>
+                        <span className="uppercase text-sm">{option.name}</span>
                       </div>
                     );
                   })}

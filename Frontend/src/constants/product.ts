@@ -3,26 +3,22 @@ export const categoryOptions = ["men", "women", "kids", "unisex"];
 export const sizeOptions = [
   {
     id: 1,
-    name: "XS",
+    name: "s",
   },
   {
     id: 2,
-    name: "S",
+    name: "m",
   },
   {
     id: 3,
-    name: "M",
+    name: "l",
   },
   {
     id: 4,
-    name: "L",
+    name: "xl",
   },
   {
     id: 5,
-    name: "XL",
-  },
-  {
-    id: 6,
-    name: "XXL",
+    name: "xxl",
   },
 ];
