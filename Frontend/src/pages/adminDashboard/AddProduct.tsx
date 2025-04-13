@@ -29,6 +29,7 @@ const AddProduct = () => {
     const productData = {
       ...data,
       images: formattedImages,
+      
     };
     console.log("Product Data:", productData);
   };
