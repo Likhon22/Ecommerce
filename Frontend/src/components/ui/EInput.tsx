@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 type InputProps = {
   type?: string;
   name: string;
-  placeholder: string;
+  placeholder?: string;
   required?: boolean;
   className?: string;
   label?: string;
