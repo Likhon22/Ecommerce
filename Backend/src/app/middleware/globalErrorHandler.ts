@@ -1,0 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { ErrorRequestHandler } from 'express';
+import { TErrorSources, TGenericErrorResponse } from '../types/error';
+
+const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Something went wrong';
+  const errorSources: TErrorSources[] = [
+    {
+      path: '',
+      message: 'Something went wrong',
+    },
+  ];
+  res.status(statusCode).json({
+    success: false,
+    message,
+    errorSources,
+    stack: err.stack,
+  });
+};
+
+export default globalErrorHandler;

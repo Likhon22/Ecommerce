@@ -5,15 +5,24 @@ import { Server } from 'http';
 
 import { app } from './app';
 import config from './app/config';
+import connectDB from './app/db/db';
 
 let server: Server;
+
+const startServer = (): Promise<Server> => {
+  const port = config.port || 3000;
+  return new Promise<Server>(resolve => {
+    server = app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+    resolve(server);
+  });
+};
 async function main() {
   try {
-    // await mongoose.connect(config.database_url as string);
+    await connectDB();
 
-    server = app.listen(config.port, () => {
-      console.log(`Example app listening on port ${config.port}`);
-    });
+    server = await startServer();
   } catch (err) {
     console.log(err);
   }
