@@ -5,7 +5,7 @@ import { Button } from "./button";
 import { Input } from "./input";
 import { X, Upload, XIcon } from "lucide-react";
 
-type ColorData = {
+export type ColorData = {
   name: string;
   hex: string;
   images?: File[];

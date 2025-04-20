@@ -1,10 +1,11 @@
-import About from "@/pages/About";
+import { lazy } from "react";
+const About = lazy(() => import("@/pages/About"));
 import AddProduct from "@/pages/adminDashboard/AddProduct";
 import AdminHome from "@/pages/adminDashboard/AdminHome";
 import Cart from "@/pages/Cart";
 import Collection from "@/pages/Collection";
 import Contact from "@/pages/Contact";
-import Home from "@/pages/Home";
+const Home = lazy(() => import("@/pages/Home"));
 import Login from "@/pages/Login";
 
 import PlaceOrder from "@/pages/PlaceOrder";

@@ -1,13 +1,12 @@
-import { Request, Response } from 'express';
+import { TProduct } from './product.interface';
+import Product from './product.model';
 
-const getProducts = (req: Request, res: Response) => {
-  res.status(201).json({
-    message: 'Get products',
-  });
+const createProductsIntoDB = async (payload: TProduct) => {
+  return await Product.create(payload);
 };
 
 const productServices = {
-  getProducts,
+  createProductsIntoDB,
 };
 
 export default productServices;

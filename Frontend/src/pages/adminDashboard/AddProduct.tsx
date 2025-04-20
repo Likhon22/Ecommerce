@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import EForm from "@/components/form/EForm";
 import EButton from "@/components/ui/EButton";
-import EColorPicker from "@/components/ui/EColorPicker";
+import EColorPicker, { ColorData } from "@/components/ui/EColorPicker";
 import EFileInput from "@/components/ui/EFileInput";
 import EInput from "@/components/ui/EInput";
 import EMultiSelect from "@/components/ui/EMultiSelect";
@@ -18,8 +19,25 @@ const AddProduct = () => {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
-    const { images } = data;
+    const { images, colors } = data;
     const uploadImagesCloudinary = await uploadImages(images);
+
+    const processedColors = await Promise.all(
+      colors.map(async (color: ColorData) => {
+        if (color.images) {
+          const uploaded = await uploadImages(color.images);
+          return {
+            ...color,
+            images: uploaded,
+          };
+        } else {
+          return {
+            ...color,
+            images: [],
+          };
+        }
+      })
+    );
 
     const validImages = uploadImagesCloudinary.filter(
       (img): img is { secure_url: string; public_id: string } => img !== null
@@ -29,7 +47,7 @@ const AddProduct = () => {
     const productData = {
       ...data,
       images: formattedImages,
-      
+      colors: processedColors,
     };
     console.log("Product Data:", productData);
   };
