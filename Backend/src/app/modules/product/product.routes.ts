@@ -3,6 +3,7 @@ import productControllers from './product.controller';
 
 const routes = Router();
 
-routes.get('/create-product', productControllers.createProducts);
+routes.post('/create-product', productControllers.createProducts);
+routes.get('/', productControllers.getProducts);
 
 export const productRoutes = routes;

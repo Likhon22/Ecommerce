@@ -21,14 +21,15 @@ export const createProductSchema = z.object({
     name: z.string(),
     description: z.string(),
     price: z.number(),
-    image: z.array(imageSchema),
+    images: z.array(imageSchema),
     sizes: z.array(sizeSchema),
     colors: z.array(colorSchema),
     category: z.enum(['kids', 'men', 'women', 'unisex']),
     subCategory: z.string(),
-    bestseller: z.boolean().optional(), // optional if not always present
-    brand: z.string(),
-    discount: z.number().min(0).max(100), // assuming discount is in percent
+    bestseller: z.boolean().optional(),
+    brand: z.string().optional(),
+    discount: z.number().min(0).max(100),
+    discountPrice: z.number().optional(),
     stock: z.number().int().min(0),
   }),
 });
