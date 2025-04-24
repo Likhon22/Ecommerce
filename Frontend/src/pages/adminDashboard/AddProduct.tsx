@@ -8,6 +8,7 @@ import EMultiSelect from "@/components/ui/EMultiSelect";
 import ESelect from "@/components/ui/ESelect";
 
 import { categoryOptions, sizeOptions } from "@/constants/product";
+import { useCreateProductsMutation } from "@/features/redux/features/product/productApi";
 import { productSchema } from "@/schemas/productSchema";
 import formatCloudinaryResponse from "@/utils/formatCloudinaryResponse ";
 import { uploadImages } from "@/utils/uploadImage";
@@ -17,6 +18,7 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 const AddProduct = () => {
   const [images, setImages] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+  const [createProduct] = useCreateProductsMutation();
   const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
     const { images, colors } = data;
@@ -26,14 +28,19 @@ const AddProduct = () => {
       colors.map(async (color: ColorData) => {
         if (color.images) {
           const uploaded = await uploadImages(color.images);
+          const validImages = uploaded.filter(
+            (img): img is { secure_url: string; public_id: string } =>
+              img !== null
+          );
+          const formattedImages = formatCloudinaryResponse(validImages);
           return {
             ...color,
-            images: uploaded,
+            images: formattedImages,
           };
         } else {
           return {
             ...color,
-            images: [],
+            images: null,
           };
         }
       })
@@ -49,7 +56,15 @@ const AddProduct = () => {
       images: formattedImages,
       colors: processedColors,
     };
-    console.log("Product Data:", productData);
+    try {
+      const response = await createProduct(productData).unwrap();
+      if (response) {
+        console.log("Product created successfully:", response);
+        // Optionally, reset the form or redirect the user
+      }
+    } catch (error) {
+      console.error("Error creating product:", error);
+    }
   };
 
   return (

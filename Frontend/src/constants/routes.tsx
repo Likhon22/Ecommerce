@@ -9,8 +9,9 @@ const Home = lazy(() => import("@/pages/Home"));
 import Login from "@/pages/Login";
 
 import PlaceOrder from "@/pages/PlaceOrder";
-import Product from "@/pages/Product";
+
 import { TRoutes } from "@/types/routes";
+import Product from "@/pages/Product";
 
 export const mainLayoutRoutes: TRoutes[] = [
   {
@@ -36,24 +37,24 @@ export const mainLayoutRoutes: TRoutes[] = [
   {
     name: "Product",
     path: "/product/:productId",
-    element: <Product />,
+    element: <Product/>,
   },
-  {
-    name: "Cart",
-    path: "/cart",
-    element: <Cart />,
-  },
-  {
-    name: "Dashboard",
-    path: "/admin-dashboard/admin-home",
-    element: <AdminHome />,
-  },
+  // {
+  //   name: "Cart",
+  //   path: "/cart",
+  //   element: <Cart />,
+  // },
+  // {
+  //   name: "Dashboard",
+  //   path: "/admin-dashboard/admin-home",
+  //   element: <AdminHome />,
+  // },
 
-  {
-    name: "PlaceOrder",
-    path: "/place-order",
-    element: <PlaceOrder />,
-  },
+  // {
+  //   name: "PlaceOrder",
+  //   path: "/place-order",
+  //   element: <PlaceOrder />,
+  // },
   {
     name: "Login",
     path: "/login",
@@ -73,5 +74,5 @@ export const adminLayoutRoutes: TRoutes[] = [
   },
 ];
 export const mainLayoutRoutesWithoutLogin = mainLayoutRoutes.filter(
-  (item) => item.path !== "/login"
+  (item) => item.path !== "/login" && item.path !== "/product/:productId"
 );
