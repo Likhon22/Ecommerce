@@ -1,14 +1,21 @@
 import EForm from "@/components/form/EForm";
 import EButton from "@/components/ui/EButton";
 import EInput from "@/components/ui/EInput";
+import { useLoginMutation } from "@/features/redux/features/auth/authApi";
 import { loginSchema } from "@/schemas/authSchema";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { FieldValues, SubmitErrorHandler } from "react-hook-form";
 
 const Login = () => {
+  const [login, { isLoading }] = useLoginMutation();
   const handleSubmit: SubmitErrorHandler<FieldValues> = (data) => {
-    console.log(data);
+    try {
+      const res = login(data).unwrap();
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
   };
   const [showPassword, setShowPassword] = useState(false);
   return (
@@ -62,6 +69,7 @@ const Login = () => {
             </div>
 
             <EButton
+              disabled={isLoading}
               type="submit"
               className="w-full py-2.5 px-4 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors"
             >

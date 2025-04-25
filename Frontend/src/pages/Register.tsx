@@ -1,15 +1,26 @@
 import EForm from "@/components/form/EForm";
 import EButton from "@/components/ui/EButton";
 import EInput from "@/components/ui/EInput";
+import { useRegisterMutation } from "@/features/redux/features/auth/authApi";
 import { registerSchema } from "@/schemas/authSchema";
+
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 
 import { FieldValues, SubmitErrorHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const handleSubmit: SubmitErrorHandler<FieldValues> = (data) => {
-    console.log(data);
+  const navigate = useNavigate();
+  const [register, { isLoading }] = useRegisterMutation();
+  const handleSubmit: SubmitErrorHandler<FieldValues> = async (data) => {
+    try {
+      const res = await register(data).unwrap();
+      console.log(res);
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
+    }
   };
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -89,6 +100,7 @@ const Register = () => {
             </div>
             <EButton
               type="submit"
+              disabled={isLoading}
               className="w-full py-2.5 px-4 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors"
             >
               Create Account
