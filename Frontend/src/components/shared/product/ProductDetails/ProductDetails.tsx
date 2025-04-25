@@ -11,9 +11,7 @@ type ProductDetailsProps = {
 };
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {
-  const [selectedColor, setSelectedColor] = useState<string>(
-    product.colors[0]?.hex || ""
-  );
+  const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
 
   return (
@@ -26,23 +24,23 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       {/* Right: Product info and actions */}
       <div>
         <ProductInfo product={product} />
-        
-        <ColorSelector 
-          product={product} 
-          selectedColor={selectedColor} 
-          setSelectedColor={setSelectedColor} 
+
+        <ColorSelector
+          product={product}
+          selectedColor={selectedColor}
+          setSelectedColor={setSelectedColor}
         />
-        
-        <SizeSelector 
-          product={product} 
-          selectedSize={selectedSize} 
-          setSelectedSize={setSelectedSize} 
+
+        <SizeSelector
+          product={product}
+          selectedSize={selectedSize}
+          setSelectedSize={setSelectedSize}
         />
-        
-        <AddToCart 
-          product={product} 
-          selectedSize={selectedSize} 
-          selectedColor={selectedColor} 
+
+        <AddToCart
+          product={product}
+          selectedSize={selectedSize}
+          selectedColor={selectedColor}
         />
       </div>
     </div>

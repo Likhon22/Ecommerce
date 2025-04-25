@@ -29,7 +29,9 @@ const ColorSelector = ({
           >
             {selectedColor === color.hex && (
               <div className="text-xs">
-                {color.hex.toLowerCase() === "#ffffff" || color.hex.toLowerCase() === "#fff" ? (
+                {color.hex.toLowerCase() === "#ffffff" ||
+                color.hex.toLowerCase() === "#fff" ||
+                color.name.toLocaleLowerCase() === "white" ? (
                   <span className="text-black">✓</span>
                 ) : (
                   <span className="text-white">✓</span>

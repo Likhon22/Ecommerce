@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TProduct } from "@/types/products";
 
 type ProductImagesProps = {
@@ -8,10 +8,10 @@ type ProductImagesProps = {
 
 const ProductImages = ({ product, selectedColor }: ProductImagesProps) => {
   const [mainImage, setMainImage] = useState<string>(
-    product?.images[0]?.cloudinaryUrl || ""
+    product.images[0]?.cloudinaryUrl || ""
   );
+  console.log(mainImage, selectedColor);
 
-  // Get images based on selected color or default product images
   const getImages = () => {
     if (selectedColor) {
       const colorImages = product?.colors?.find(
@@ -22,41 +22,57 @@ const ProductImages = ({ product, selectedColor }: ProductImagesProps) => {
         return colorImages;
       }
     }
+
     return product?.images || [];
   };
-
+  useEffect(() => {
+    const imgs = getImages();
+    if (imgs.length > 0) {
+      setMainImage(imgs[0].cloudinaryUrl);
+    }
+  }, [selectedColor, product]);
   const images = getImages();
-
   return (
-    <div className="flex flex-col md:flex-row gap-4">
-      {/* Main image */}
-      <div className="flex-1">
-        <img
-          src={mainImage}
-          alt={product.name}
-          className="w-full h-auto object-cover rounded-md"
-        />
+    <div>
+      <div>
+        <img className="w-full h-[400px]" src={mainImage} alt="" />
       </div>
-
-      {/* Thumbnails */}
-      <div className="flex md:flex-col gap-2 overflow-x-auto md:overflow-y-auto">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`w-20 h-20 cursor-pointer border-2 ${
-              mainImage === image.cloudinaryUrl
-                ? "border-black"
-                : "border-gray-200"
-            }`}
-            onClick={() => setMainImage(image.cloudinaryUrl)}
-          >
-            <img
-              src={image.cloudinaryUrl}
-              alt={`${product.name} - ${index}`}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ))}
+      <div>
+        <div className="flex gap-2 mt-2">
+          {selectedColor ? (
+            <div>
+              {images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image.cloudinaryUrl}
+                  alt={`Product image ${index + 1}`}
+                  className={`w-16 h-16 object-cover cursor-pointer ${
+                    mainImage === image.cloudinaryUrl
+                      ? "border-2 border-blue-500"
+                      : ""
+                  }`}
+                  onClick={() => setMainImage(image.cloudinaryUrl)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="flex gap-2 mt-2">
+              {product.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image.cloudinaryUrl}
+                  alt={`Product image ${index + 1}`}
+                  className={`w-16 h-16 object-cover cursor-pointer ${
+                    mainImage === image.cloudinaryUrl
+                      ? "border-2 border-blue-500"
+                      : ""
+                  }`}
+                  onClick={() => setMainImage(image.cloudinaryUrl)}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
