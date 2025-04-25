@@ -7,8 +7,13 @@ const routes = Router();
 
 routes.post(
   '/create-user',
-//   validateRequest(authValidations.registerSchema),
+  validateRequest(authValidations.registerSchema),
   authControllers.createUser,
+);
+routes.post(
+  '/login',
+  validateRequest(authValidations.loginSchema),
+  authControllers.loginUser,
 );
 
 export const authRoutes = routes;

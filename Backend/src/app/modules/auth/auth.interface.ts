@@ -8,4 +8,8 @@ export type TRegisterUser = z.infer<typeof registerSchema>['body'];
 
 export interface userModel extends Model<TRegisterUser> {
   isUserExists(email: string): Promise<TRegisterUser> | null;
+  isPasswordMatched(
+    givenPassword: string,
+    savedPassword: string,
+  ): Promise<boolean>;
 }
