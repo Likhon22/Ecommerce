@@ -12,6 +12,7 @@ import PlaceOrder from "@/pages/PlaceOrder";
 
 import { TRoutes } from "@/types/routes";
 import Product from "@/pages/Product";
+import Register from "@/pages/Register";
 
 export const mainLayoutRoutes: TRoutes[] = [
   {
@@ -37,7 +38,7 @@ export const mainLayoutRoutes: TRoutes[] = [
   {
     name: "Product",
     path: "/product/:productId",
-    element: <Product/>,
+    element: <Product />,
   },
   // {
   //   name: "Cart",
@@ -60,6 +61,11 @@ export const mainLayoutRoutes: TRoutes[] = [
     path: "/login",
     element: <Login />,
   },
+  {
+    name: "Register",
+    path: "/register",
+    element: <Register />,
+  },
 ];
 export const adminLayoutRoutes: TRoutes[] = [
   {
@@ -74,5 +80,8 @@ export const adminLayoutRoutes: TRoutes[] = [
   },
 ];
 export const mainLayoutRoutesWithoutLogin = mainLayoutRoutes.filter(
-  (item) => item.path !== "/login" && item.path !== "/product/:productId"
+  (item) =>
+    item.path !== "/login" &&
+    item.path !== "/product/:productId" &&
+    item.path !== "/register"
 );

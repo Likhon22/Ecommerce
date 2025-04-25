@@ -12,7 +12,7 @@ const ProductCard = ({ product }: { product: TProduct }) => {
         {product?.images?.length > 0 && (
           <div className="overflow-hidden">
             <img
-              className="transition ease-in-out hover:scale-105 "
+              className="transition ease-in-out hover:scale-105 h-[220px]  w-full"
               src={product.images[0].cloudinaryUrl}
               alt={product.name}
             />

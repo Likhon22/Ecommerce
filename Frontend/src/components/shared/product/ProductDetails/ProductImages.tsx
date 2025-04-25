@@ -35,7 +35,12 @@ const ProductImages = ({ product, selectedColor }: ProductImagesProps) => {
   return (
     <div>
       <div>
-        <img className="w-full h-[400px]" src={mainImage} alt="" />
+        <img
+          loading="lazy"
+          className="w-full h-[400px]"
+          src={mainImage}
+          alt=""
+        />
       </div>
       <div>
         <div className="flex gap-2 mt-2">
@@ -44,6 +49,7 @@ const ProductImages = ({ product, selectedColor }: ProductImagesProps) => {
               {images.map((image, index) => (
                 <img
                   key={index}
+                  loading="lazy"
                   src={image.cloudinaryUrl}
                   alt={`Product image ${index + 1}`}
                   className={`w-16 h-16 object-cover cursor-pointer ${
@@ -60,6 +66,7 @@ const ProductImages = ({ product, selectedColor }: ProductImagesProps) => {
               {product.images.map((image, index) => (
                 <img
                   key={index}
+                  loading="lazy"
                   src={image.cloudinaryUrl}
                   alt={`Product image ${index + 1}`}
                   className={`w-16 h-16 object-cover cursor-pointer ${
