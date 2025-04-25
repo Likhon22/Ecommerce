@@ -1,9 +1,6 @@
-export type TLoginUser = {
-  email: string;
-  password: string;
-};
+import { loginSchema, registerSchema } from "@/schemas/authSchema";
+import { z } from "zod";
 
-export type TRegisterUser = TLoginUser & {
-  name: string;
-  confirmPassword: string;
-};
+export type TLoginUser = z.infer<typeof loginSchema>;
+
+export type TRegisterUser = z.infer<typeof registerSchema>;
