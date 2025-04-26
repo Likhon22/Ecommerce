@@ -7,6 +7,7 @@ import handleDuplicateError from '../error/handleDuplicateError';
 import { ZodError } from 'zod';
 import handleZodError from '../error/handleZodError';
 import handleValidationError from '../error/handleValidationError';
+import handleUnauthorize from '../error/handleUnAuthorize';
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = err.statusCode || 500;
@@ -35,6 +36,11 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     errorSources = simplifiedError.errorSources;
   } else if (err?.name === 'ValidationError') {
     const simplifiedError = handleValidationError(err);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorSources = simplifiedError.errorSources;
+  } else if (err.statusCode === 401) {
+    const simplifiedError = handleUnauthorize(err);
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorSources = simplifiedError.errorSources;

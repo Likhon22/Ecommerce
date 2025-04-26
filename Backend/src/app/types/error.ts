@@ -8,5 +8,5 @@ export type TGenericErrorResponse = {
   statusCode?: number;
   errorSources: TErrorSources[];
   stack?: string;
-  success: boolean;
+  success?: boolean;
 };

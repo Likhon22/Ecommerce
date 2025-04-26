@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from 'express';
+import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import cors from 'cors';
 import { moduleRoutes } from './app/routes/routes';
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cors());
+app.use(cookieParser());
 app.use(generalRateLimiter);
 app.use(devLogger);
 
