@@ -1,11 +1,10 @@
-// server will be there
-// example server
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { Server } from 'http';
-
 import { app } from './app';
 import config from './app/config';
 import connectDB from './app/db/db';
+import ApiError from './app/error/ApiError';
 
 let server: Server;
 
@@ -24,7 +23,7 @@ async function main() {
 
     server = await startServer();
   } catch (err) {
-    console.log(err);
+    throw new ApiError(500, `Failed to start server: ${err}`);
   }
 }
 

@@ -6,6 +6,7 @@ import hashPassword from '../../utils/hashPasssword';
 import { TJwtPayload, TLoginUser, TRegisterUser } from './auth.interface';
 import User from './auth.model';
 import verifyToken from '../../utils/verifyToken';
+import sendMail from '../../utils/sendMail';
 
 const createUserIntoDB = async (payload: TRegisterUser) => {
   const isUserExists = await User.isUserExists(payload.email);
@@ -62,6 +63,11 @@ const loginUserFromDB = async (payload: TLoginUser) => {
       expiresIn: config.jwt.jwt_expires_in,
     } as SignOptions,
   );
+  await sendMail({
+    to: isUserExists.email,
+    subject: 'Login Successfull',
+    text: `Hello ${isUserExists.name}, you have successfully logged in to your account.`,
+  });
   const refreshToken = createToken(
     jwtPayload,
     config.jwt.jwt_refresh_secret as string,
