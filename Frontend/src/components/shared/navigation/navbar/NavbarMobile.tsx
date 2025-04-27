@@ -7,6 +7,7 @@ import Container from "../../layout/container/Container";
 const NavbarMobile = () => {
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
+
   return (
     <div className="bg-primary">
       <Container>

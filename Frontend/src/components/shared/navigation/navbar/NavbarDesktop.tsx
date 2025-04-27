@@ -8,8 +8,12 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import EButton from "@/components/ui/EButton";
 import Container from "../../layout/container/Container";
+import { useAppDispatch, useAppSelector } from "@/features/redux/hook";
+import { logout, selectedUser } from "@/features/redux/features/auth/authSlice";
 
 const NavbarDesktop = () => {
+  const user = useAppSelector(selectedUser);
+  const dispatch = useAppDispatch();
   return (
     <Container>
       <div className="flex items-center justify-between w-full space-x-3  ">
@@ -41,11 +45,17 @@ const NavbarDesktop = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <EButton className="bg-primary">
-          <Link to="/login" className="font-bold ">
-            Login
-          </Link>
-        </EButton>
+        {user ? (
+          <EButton onClick={() => dispatch(logout())} className="bg-primary">
+            Logout
+          </EButton>
+        ) : (
+          <EButton className="bg-primary">
+            <Link to="/login" className="font-bold ">
+              Login
+            </Link>
+          </EButton>
+        )}
       </div>
     </Container>
   );

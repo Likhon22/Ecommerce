@@ -9,10 +9,12 @@ import decodeToken from "@/utils/decodeToken";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { FieldValues, SubmitErrorHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const handleSubmit: SubmitErrorHandler<FieldValues> = async (data) => {
     try {
       const res = await login(data).unwrap();
@@ -20,6 +22,7 @@ const Login = () => {
       const token = res?.data?.accessToken as string;
       const userInfo = decodeToken(token);
       dispatch(setUser({ user: userInfo, token }));
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
