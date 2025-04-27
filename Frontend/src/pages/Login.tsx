@@ -2,17 +2,24 @@ import EForm from "@/components/form/EForm";
 import EButton from "@/components/ui/EButton";
 import EInput from "@/components/ui/EInput";
 import { useLoginMutation } from "@/features/redux/features/auth/authApi";
+import { setUser } from "@/features/redux/features/auth/authSlice";
+import { useAppDispatch } from "@/features/redux/hook";
 import { loginSchema } from "@/schemas/authSchema";
+import decodeToken from "@/utils/decodeToken";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { FieldValues, SubmitErrorHandler } from "react-hook-form";
 
 const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
-  const handleSubmit: SubmitErrorHandler<FieldValues> = (data) => {
+  const dispatch = useAppDispatch();
+  const handleSubmit: SubmitErrorHandler<FieldValues> = async (data) => {
     try {
-      const res = login(data).unwrap();
-      console.log(res);
+      const res = await login(data).unwrap();
+
+      const token = res?.data?.accessToken as string;
+      const userInfo = decodeToken(token);
+      dispatch(setUser({ user: userInfo, token }));
     } catch (err) {
       console.log(err);
     }
