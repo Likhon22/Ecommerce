@@ -5,6 +5,7 @@ import { app } from './app';
 import config from './app/config';
 import connectDB from './app/db/db';
 import ApiError from './app/error/ApiError';
+import initializeScheduledJobs from './app/jobs/schedular';
 
 let server: Server;
 
@@ -13,6 +14,7 @@ const startServer = (): Promise<Server> => {
   return new Promise<Server>(resolve => {
     server = app.listen(port, () => {
       console.log(`Server is running on port ${port}`);
+      initializeScheduledJobs();
     });
     resolve(server);
   });

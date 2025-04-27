@@ -18,4 +18,7 @@ export default {
     admin_email: process.env.ADMIN_EMAIL,
     admin_email_auth_password: process.env.ADMIN_EMAIL_AUTH_PASSWORD,
   },
+  gemini: {
+    apiKey: process.env.GEMINI_API_KEY,
+  },
 };

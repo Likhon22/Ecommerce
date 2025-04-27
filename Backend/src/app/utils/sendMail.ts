@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import nodemailer from 'nodemailer';
 import config from '../config';
+import ApiError from '../error/ApiError';
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
@@ -13,21 +15,23 @@ const sendMail = async (content: {
   to: string;
   subject: string;
   text: string;
+  attachments?: Buffer;
 }) => {
-  console.log(
-    config.nodemailer.admin_email,
-    config.nodemailer.admin_email_auth_password,
-  );
-
   try {
     await transporter.sendMail({
       from: '"EasyWear "',
       to: content.to,
       subject: content.subject,
       text: content.text,
+      attachments: content.attachments && [
+        {
+          filename: 'report.pdf',
+          content: content.attachments,
+        },
+      ],
     });
   } catch (error) {
-    console.log(error);
+    throw new ApiError(400, 'Failed to send email');
   }
 };
 

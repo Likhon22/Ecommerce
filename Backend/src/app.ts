@@ -7,6 +7,7 @@ import globalErrorHandler from './app/middleware/globalErrorHandler';
 import notFound from './app/middleware/notFound';
 import { generalRateLimiter } from './app/middleware/rateLimiter';
 import { devLogger } from './app/middleware/logger';
+
 export const app: Application = express();
 
 // middleware
