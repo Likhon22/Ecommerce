@@ -1,12 +1,14 @@
-import { products } from "@/assets/frontend_assets/assets";
 import HeadingSection from "@/components/shared/headingSection/HeadingSection";
 import Container from "@/components/shared/layout/container/Container";
 
 import ProductGrid from "@/components/shared/product/ProductGrid";
+
+import { useGetProductsQuery } from "@/features/redux/features/product/productApi";
 import { TProduct } from "@/types/products";
 
 const LatestCollection = () => {
-  const assetProducts: TProduct[] = products;
+  const { data } = useGetProductsQuery(undefined);
+  const product: TProduct[] = data?.data;
 
   return (
     <Container>
@@ -16,7 +18,8 @@ const LatestCollection = () => {
           secondText="COLLECTIONS"
           subSectionText="Discover our new styles for the season"
         />
-        <ProductGrid products={assetProducts} />
+
+        <ProductGrid products={product} />
       </div>
     </Container>
   );

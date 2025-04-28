@@ -45,7 +45,7 @@ const ProductImages = ({ product, selectedColor }: ProductImagesProps) => {
       <div>
         <div className="flex gap-2 mt-2">
           {selectedColor ? (
-            <div>
+            <div className="flex gap-2 mt-2">
               {images.map((image, index) => (
                 <img
                   key={index}
@@ -62,7 +62,7 @@ const ProductImages = ({ product, selectedColor }: ProductImagesProps) => {
               ))}
             </div>
           ) : (
-            <div className="flex gap-2 mt-2">
+            <div className=" flex gap-2 mt-2">
               {product.images.map((image, index) => (
                 <img
                   key={index}

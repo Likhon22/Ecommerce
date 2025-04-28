@@ -8,8 +8,8 @@ type ProductInfoProps = {
 const ProductInfo = ({ product }: ProductInfoProps) => {
   // Calculate the final price after discount
   const finalPrice =
-    product.discount > 0
-      ? product.price - product.price * (product.discount / 100)
+    product.discount > 0 && product.discountPrice
+      ? product?.discountPrice
       : product.price;
 
   return (

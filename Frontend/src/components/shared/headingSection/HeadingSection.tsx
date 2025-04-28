@@ -12,6 +12,7 @@ type HeadingProps = {
   firstTextClassName?: string;
   secondTextClassName?: string;
   subSectionText?: string;
+  className?: string;
 };
 
 const HeadingSection = ({
@@ -25,10 +26,11 @@ const HeadingSection = ({
   secondTextClassName = "string",
   fondWidth = "semibold",
   subSectionText,
+  className,
 }: HeadingProps) => {
   return (
     <div className="flex justify-center items-center flex-col gap-2">
-      <div className="flex items-center  gap-2">
+      <div className={cn(`flex items-center  gap-2 ${className}`)}>
         <h2
           className={cn(
             `text-2xl font-${fondWidth} text-${firstTextColor}`,
