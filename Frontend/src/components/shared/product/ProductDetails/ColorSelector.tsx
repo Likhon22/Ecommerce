@@ -12,23 +12,25 @@ const ColorSelector = ({
   setSelectedColor,
 }: ColorSelectorProps) => {
   return (
-    <div className="mt-4">
-      <h3 className="text-sm font-medium mb-2">Colors</h3>
-      <div className="flex gap-2 flex-wrap">
+    <div className="mt-6">
+      <h3 className="text-sm font-medium mb-3 text-foreground/80 uppercase tracking-wider">
+        Colors
+      </h3>
+      <div className="flex gap-3 flex-wrap">
         {product.colors.map((color, index) => (
           <div
             key={index}
             title={color.name}
-            className={`w-8 h-8 rounded-full cursor-pointer flex items-center justify-center border ${
+            className={`w-10 h-10 rounded-full cursor-pointer flex items-center justify-center transition-all duration-300 ${
               selectedColor === color.hex
-                ? "border-black ring-2 ring-gray-300"
-                : "border-gray-300"
+                ? "ring-2 ring-primary ring-offset-2"
+                : "border border-gray-300 hover:shadow-md"
             }`}
             style={{ backgroundColor: color.hex }}
             onClick={() => setSelectedColor(color.hex)}
           >
             {selectedColor === color.hex && (
-              <div className="text-xs">
+              <div className="text-sm animate-fade-in">
                 {color.hex.toLowerCase() === "#ffffff" ||
                 color.hex.toLowerCase() === "#fff" ||
                 color.name.toLocaleLowerCase() === "white" ? (

@@ -16,3 +16,9 @@ export const sortConstants = [
     value: "price",
   },
 ];
+
+export const productPriceRange = {
+  min: 0,
+  max: 1000,
+  step: 10,
+};

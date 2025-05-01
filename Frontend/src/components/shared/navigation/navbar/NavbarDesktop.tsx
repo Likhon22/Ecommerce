@@ -16,25 +16,26 @@ const NavbarDesktop = () => {
   const dispatch = useAppDispatch();
   return (
     <Container>
-      <div className="flex items-center justify-between w-full space-x-3  ">
-        <Link to="/" className="text-2xl font-bold text-primary">
+      <div className="flex items-center justify-between w-full py-5 border-b border-border">
+        <Link
+          to="/"
+          className="text-3xl font-bold font-playfair text-primary tracking-wider"
+        >
           EasyWear
         </Link>
         <NavigationMenu>
-          <NavigationMenuList className="flex gap-3  ">
+          <NavigationMenuList className="flex gap-8">
             {mainLayoutRoutesWithoutLogin.map((route, index) => (
               <NavigationMenuItem key={index}>
                 <NavLink
                   to={route.path}
                   className={({ isActive, isPending }) =>
                     cn(
-                      "relative inline-block px-1 text-primary font-medium  transition-colors duration-300",
-                      "after:content-[''] after:absolute after:left-1 after:bottom-0 after:h-[1px] after:bg-gray-900 after:transition-all after:duration-300 after:ease-in-out",
-                      "hover:after:w-3/4",
-
-                      "after:w-2/4",
-                      isActive && "text-blue-500 after:bg-blue-500 after:w-3/4",
-                      isPending && "opacity-50"
+                      "relative inline-block px-1 font-medium uppercase tracking-wide text-sm transition-colors duration-300 btn-hover-effect",
+                      isPending && "opacity-50",
+                      isActive
+                        ? "text-primary after:w-full"
+                        : "text-foreground/80 hover:text-primary"
                     )
                   }
                 >
@@ -46,13 +47,16 @@ const NavbarDesktop = () => {
         </NavigationMenu>
 
         {user ? (
-          <EButton onClick={() => dispatch(logout())} className="bg-primary">
-            Logout
+          <EButton
+            onClick={() => dispatch(logout())}
+            className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md transition-all duration-300"
+          >
+            Sign Out
           </EButton>
         ) : (
-          <EButton className="bg-primary">
-            <Link to="/login" className="font-bold ">
-              Login
+          <EButton className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-md transition-all duration-300">
+            <Link to="/login" className="font-medium">
+              Sign In
             </Link>
           </EButton>
         )}

@@ -7,7 +7,11 @@ import EInput from "@/components/ui/EInput";
 import EMultiSelect from "@/components/ui/EMultiSelect";
 import ESelect from "@/components/ui/ESelect";
 
-import { categoryOptions, sizeOptions } from "@/constants/product";
+import {
+  categoryOptions,
+  sizeOptions,
+  subCategoryOptions,
+} from "@/constants/product";
 import { useCreateProductsMutation } from "@/features/redux/features/product/productApi";
 import { productSchema } from "@/schemas/productSchema";
 import formatCloudinaryResponse from "@/utils/formatCloudinaryResponse ";
@@ -107,7 +111,7 @@ const AddProduct = () => {
           <ESelect
             name="subCategory"
             label="Sub Category"
-            selectOptions={categoryOptions}
+            selectOptions={subCategoryOptions}
           />
           <EColorPicker name="colors" label="Colors" />
           <EMultiSelect multiOptions={sizeOptions} name="sizes" label="Sizes" />
