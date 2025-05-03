@@ -11,6 +11,7 @@ const initializeScheduledJobs = () => {
         await aiAgentController.generateAndSendReportLogic({
           period: 'weekly',
         });
+        console.log('Weekly report generated and sent successfully!');
       } catch (error) {
         throw new ApiError(400, 'Failed to generate weekly report');
       }

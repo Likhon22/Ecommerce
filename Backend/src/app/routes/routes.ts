@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { productRoutes } from '../modules/product/product.routes';
 import { authRoutes } from '../modules/auth/auth.routes';
 import { aiAgentRoutes } from '../modules/aiAgent/aiAgent.routes';
+import { cartRoutes } from '../modules/cart/cart.routes';
 
 const router = Router();
 type routes = {
@@ -20,6 +21,10 @@ const routes: routes = [
   {
     path: '/aiAgent',
     route: aiAgentRoutes,
+  },
+  {
+    path: '/cart',
+    route: cartRoutes,
   },
 ];
 

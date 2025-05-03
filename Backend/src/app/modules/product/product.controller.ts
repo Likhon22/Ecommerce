@@ -13,11 +13,14 @@ const createProducts = catchAsync(async (req: Request, res: Response) => {
   });
 });
 const getProducts = catchAsync(async (req: Request, res: Response) => {
-  const products = await productServices.getProductsFromDB();
+  const query = req.query;
+
+  const products = await productServices.getProductsFromDB(query);
   sendResponse(res, {
     statusCode: 200,
     message: 'Products retrieved successfully',
-    data: products,
+    data: products.result,
+    meta: products.meta,
     success: true,
   });
 });

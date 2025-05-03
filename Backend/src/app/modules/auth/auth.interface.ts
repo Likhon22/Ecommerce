@@ -4,8 +4,14 @@ import { Model } from 'mongoose';
 
 export type TLoginUser = z.infer<typeof loginSchema>['body'];
 
-export type TRegisterUser = z.infer<typeof registerSchema>['body'];
-export type TJwtPayload = Pick<TRegisterUser, 'name' | 'email'>;
+export type TRegisterUser = z.infer<typeof registerSchema>['body'] & {
+  role: 'user' | 'admin';
+};
+export type TJwtPayload = Pick<TRegisterUser, 'name' | 'email'> & {
+  iat?: number;
+  exp?: number;
+  role: 'user' | 'admin';
+};
 
 export interface userModel extends Model<TRegisterUser> {
   isUserExists(email: string): Promise<TRegisterUser> | null;

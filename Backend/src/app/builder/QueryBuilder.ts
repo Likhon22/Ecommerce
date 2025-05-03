@@ -1,5 +1,6 @@
 import { FilterQuery, Query } from 'mongoose';
 import { excludeFields } from '../types/builder';
+
 class QueryBuilder<T> {
   public modelQuery: Query<T[], T>;
   public query: Record<string, unknown>;
@@ -8,7 +9,7 @@ class QueryBuilder<T> {
     this.query = query;
   }
   search(searchableFields: string[]) {
-    const searchTerm = this?.query?.search as string;
+    const searchTerm = this?.query?.searchTerm as string;
     if (searchTerm) {
       this.modelQuery.find({
         $or: searchableFields.map(field => ({
@@ -21,6 +22,21 @@ class QueryBuilder<T> {
   filter() {
     const queryCopy = { ...this.query };
     excludeFields.forEach(field => delete queryCopy[field]);
+    Object.entries(queryCopy).forEach(([key, value]) => {
+      if (key === 'price' && typeof value === 'string' && value.includes(',')) {
+        const [minPrice, maxPrice] = value
+          .split(',')
+          .map(item => Number(item.trim()));
+
+        if (!isNaN(minPrice) && !isNaN(maxPrice)) {
+          queryCopy[key] = { $gte: minPrice, $lte: maxPrice };
+        }
+      } else if (typeof value === 'string' && value.includes(',')) {
+        const values = value.split(',').map(item => item.trim());
+        queryCopy[key] = { $in: values };
+      }
+    });
+
     this.modelQuery = this.modelQuery.find(queryCopy as FilterQuery<T>);
     return this;
   }
