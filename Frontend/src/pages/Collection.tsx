@@ -69,7 +69,6 @@ const Collection = () => {
             firstText="Our Premium"
             secondText="COLLECTIONS"
             subSectionText="Discover our curated styles for the season"
-            className="mb-8"
           />
           <div className="bg-card shadow-sm rounded-lg p-5 mb-8">
             <div className="flex flex-col md:flex-row mt-4 items-center gap-4 md:justify-between">

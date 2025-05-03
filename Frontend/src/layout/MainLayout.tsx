@@ -1,10 +1,12 @@
 import Navbar from "@/components/shared/navigation/navbar/Navbar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 const MainLayout = () => {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin-dashboard");
   return (
     <div>
-      <Navbar />
+      {!isAdminRoute && <Navbar />}
       <Outlet />
     </div>
   );

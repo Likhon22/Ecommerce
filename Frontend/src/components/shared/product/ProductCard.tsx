@@ -2,9 +2,6 @@ import { currency } from "@/constants/product";
 import { TProduct } from "@/types/products";
 import { Link } from "react-router-dom";
 
-import { ShoppingCart } from "lucide-react";
-import EButton from "@/components/ui/EButton";
-
 const ProductCard = ({ product }: { product: TProduct }) => {
   const finalPrice =
     product.discount > 0 && product.discountPrice
@@ -29,12 +26,6 @@ const ProductCard = ({ product }: { product: TProduct }) => {
               src={product.images[0].cloudinaryUrl}
               alt={product.name}
             />
-            <div className="absolute bottom-2 left-2 right-2">
-              <EButton className=" w-full  flex items-center justify-center gap-2 bg-primary text-white py-2 rounded-md hover:bg-secondary  shadow-md">
-                <ShoppingCart size={16} />
-                <span className="text-sm font-medium">Add to Cart</span>
-              </EButton>
-            </div>
           </div>
         )}
 

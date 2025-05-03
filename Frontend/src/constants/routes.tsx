@@ -8,8 +8,6 @@ import Contact from "@/pages/Contact";
 const Home = lazy(() => import("@/pages/Home"));
 import Login from "@/pages/Login";
 
-import PlaceOrder from "@/pages/PlaceOrder";
-
 import { TRoutes } from "@/types/routes";
 import Product from "@/pages/Product";
 import Register from "@/pages/Register";
@@ -40,16 +38,16 @@ export const mainLayoutRoutes: TRoutes[] = [
     path: "/product/:productId",
     element: <Product />,
   },
-  // {
-  //   name: "Cart",
-  //   path: "/cart",
-  //   element: <Cart />,
-  // },
-  // {
-  //   name: "Dashboard",
-  //   path: "/admin-dashboard/admin-home",
-  //   element: <AdminHome />,
-  // },
+  {
+    name: "Cart",
+    path: "/cart",
+    element: <Cart />,
+  },
+  {
+    name: "Dashboard",
+    path: "/admin-dashboard/admin-home",
+    element: <AdminHome />,
+  },
 
   // {
   //   name: "PlaceOrder",
