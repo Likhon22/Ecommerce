@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TProduct } from "@/types/products";
+import { TColor, TProduct } from "@/types/products";
 import ProductImages from "./ProductImages";
 import ProductInfo from "./ProductInfo";
 import ColorSelector from "./ColorSelector";
@@ -11,8 +11,11 @@ type ProductDetailsProps = {
 };
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {
-  const [selectedColor, setSelectedColor] = useState<string>("");
-  const [selectedSize, setSelectedSize] = useState<number | null>(null);
+  const [selectedColor, setSelectedColor] = useState<TColor>({
+    name: "",
+    hex: "",
+  });
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

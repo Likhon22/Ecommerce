@@ -1,16 +1,25 @@
 import { useState } from "react";
 import EButton from "@/components/ui/EButton";
-import { TProduct } from "@/types/products";
+import { TColor, TProduct } from "@/types/products";
+import { toast } from "sonner";
+import { useAppSelector } from "@/features/redux/hook";
+import { selectedUser } from "@/features/redux/features/auth/authSlice";
+import { useAddToCartMutation } from "@/features/redux/features/cart/cartApi";
 
 type AddToCartProps = {
   product: TProduct;
-  selectedSize: number | null;
-  selectedColor: string;
+  selectedSize: string | null;
+  selectedColor: TColor | null;
 };
 
-const AddToCart = ({ product, selectedSize, selectedColor }: AddToCartProps) => {
+const AddToCart = ({
+  product,
+  selectedSize,
+  selectedColor,
+}: AddToCartProps) => {
   const [quantity, setQuantity] = useState<number>(1);
-
+  const user = useAppSelector(selectedUser);
+  const [addCart] = useAddToCartMutation();
   const incrementQuantity = () => {
     if (quantity < product.stock) {
       setQuantity(quantity + 1);
@@ -24,18 +33,39 @@ const AddToCart = ({ product, selectedSize, selectedColor }: AddToCartProps) => 
   };
 
   const handleAddToCart = () => {
+    const cartItem = {
+      productId: product._id,
+
+      quantity,
+      size: selectedSize,
+      color: {
+        name: selectedColor?.name,
+        hex: selectedColor?.hex,
+      },
+      price: product.price,
+      email: user?.email,
+    };
+    console.log("Adding item to cart:", cartItem);
+
     if (!selectedSize || !selectedColor) {
-      alert("Please select size and color");
+      toast.error("Please select size and color before adding to cart.");
+
       return;
     }
 
-    // Here you would typically dispatch an action to add the item to cart
-    console.log("Adding to cart:", {
-      product,
-      selectedSize,
-      selectedColor,
-      quantity,
-    });
+    if (!user?.email) {
+      toast.error("Please login to add items to your cart.");
+      console.log("User not logged in. Redirecting to login page.");
+
+      return;
+    }
+    try {
+      addCart(cartItem).unwrap();
+      toast.success("Item added to cart successfully!");
+    } catch (err) {
+      console.error("Error adding item to cart:", err);
+      toast.error("Failed to add item to cart. Please try again.");
+    }
   };
 
   return (

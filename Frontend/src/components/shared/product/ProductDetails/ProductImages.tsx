@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { TProduct } from "@/types/products";
+import { TColor, TProduct } from "@/types/products";
 
 type ProductImagesProps = {
   product: TProduct;
-  selectedColor?: string;
+  selectedColor?: TColor;
 };
 
 const ProductImages = ({ product, selectedColor }: ProductImagesProps) => {
@@ -15,7 +16,7 @@ const ProductImages = ({ product, selectedColor }: ProductImagesProps) => {
   const getImages = () => {
     if (selectedColor) {
       const colorImages = product?.colors?.find(
-        (color) => color.hex === selectedColor
+        (color) => color.hex === selectedColor.hex
       )?.images;
 
       if (colorImages && colorImages.length > 0) {

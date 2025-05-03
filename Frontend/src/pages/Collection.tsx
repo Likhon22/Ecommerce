@@ -1,3 +1,4 @@
+import EmptyView from "@/components/shared/emptyView/EmptyView";
 import HeadingSection from "@/components/shared/headingSection/HeadingSection";
 
 import ProductGrid from "@/components/shared/product/ProductGrid";
@@ -48,6 +49,16 @@ const Collection = () => {
     ].filter(Boolean)
   );
 
+  if (products?.data?.length === 0 && !isLoading) {
+    return (
+      <EmptyView
+        heading="No products found"
+        description="Looks like we couldn't find any products matching your criteria."
+        button="Start Shopping"
+        link="/collection"
+      />
+    );
+  }
   return (
     <div className="bg-background min-h-screen pb-16">
       {isLoading && <Spinner />}

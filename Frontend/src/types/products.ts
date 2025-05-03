@@ -27,3 +27,7 @@ export type TProduct = {
   discountPrice?: number;
   stock: number;
 };
+export type TColor = {
+  name: string;
+  hex: string;
+};

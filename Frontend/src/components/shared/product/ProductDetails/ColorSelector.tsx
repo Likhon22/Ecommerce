@@ -1,9 +1,9 @@
-import { TProduct } from "@/types/products";
+import { TColor, TProduct } from "@/types/products";
 
 type ColorSelectorProps = {
   product: TProduct;
-  selectedColor: string;
-  setSelectedColor: (color: string) => void;
+  selectedColor: TColor;
+  setSelectedColor: (color: TColor) => void;
 };
 
 const ColorSelector = ({
@@ -22,14 +22,16 @@ const ColorSelector = ({
             key={index}
             title={color.name}
             className={`w-10 h-10 rounded-full cursor-pointer flex items-center justify-center transition-all duration-300 ${
-              selectedColor === color.hex
+              selectedColor.hex === color.hex
                 ? "ring-2 ring-primary ring-offset-2"
                 : "border border-gray-300 hover:shadow-md"
             }`}
             style={{ backgroundColor: color.hex }}
-            onClick={() => setSelectedColor(color.hex)}
+            onClick={() =>
+              setSelectedColor({ name: color.name, hex: color.hex })
+            }
           >
-            {selectedColor === color.hex && (
+            {selectedColor.hex === color.hex && (
               <div className="text-sm animate-fade-in">
                 {color.hex.toLowerCase() === "#ffffff" ||
                 color.hex.toLowerCase() === "#fff" ||
