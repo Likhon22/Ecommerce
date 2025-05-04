@@ -1,3 +1,4 @@
+import Footer from "@/components/shared/footer/Footer";
 import Navbar from "@/components/shared/navigation/navbar/Navbar";
 import { Outlet, useLocation } from "react-router-dom";
 
@@ -8,6 +9,7 @@ const MainLayout = () => {
     <div>
       {!isAdminRoute && <Navbar />}
       <Outlet />
+      {!isAdminRoute && <Footer />}
     </div>
   );
 };

@@ -3,7 +3,10 @@ import { baseApi } from "../../api/baseApi";
 const cartApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getCart: builder.query({
-      query: () => "/cart",
+      query: (email: string) => ({
+        url: `/cart/${email}`,
+        method: "GET",
+      }),
     }),
     addToCart: builder.mutation({
       query: (item) => ({

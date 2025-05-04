@@ -1,3 +1,6 @@
+import AccordionQuestion from "@/components/ui/AccordionQuestion";
+import { frequentlyAskedQuestions } from "@/constants/accordionQuestion";
+
 const Contact = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
@@ -108,7 +111,7 @@ const Contact = () => {
             Reach Us
           </h2>
 
-          <div className="space-y-8">
+          <div className="space-y-8 bg-gray-100 p-6 rounded-lg shadow-md">
             <div>
               <h3 className="font-playfair text-lg mb-2">Customer Support</h3>
               <p className="mb-1">
@@ -224,54 +227,7 @@ const Contact = () => {
         </section>
       </div>
 
-      <section className="mb-12">
-        <h2 className="text-2xl md:text-3xl font-playfair text-primary border-b border-muted pb-2 mb-6">
-          Frequently Asked Questions
-        </h2>
-        <div className="space-y-6">
-          <div>
-            <h3 className="font-medium text-lg mb-2">
-              What is your return policy?
-            </h3>
-            <p>
-              We offer a 30-day return policy on all unworn items in their
-              original condition with tags attached. Returns are free for
-              members of our EasyWear+ program, and a small fee applies for
-              standard customers.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-medium text-lg mb-2">
-              How long does shipping take?
-            </h3>
-            <p>
-              Standard shipping typically takes 3-5 business days. Express
-              shipping is available for 1-2 business day delivery. International
-              shipping varies by location but generally takes 7-14 business
-              days.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-medium text-lg mb-2">
-              Do you offer size exchanges?
-            </h3>
-            <p>
-              Yes, we offer free size exchanges on all items. Simply contact our
-              customer service team to initiate an exchange, and we'll help you
-              find the perfect fit.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-medium text-lg mb-2">
-              Are gift cards available?
-            </h3>
-            <p>
-              Yes, digital gift cards are available for purchase on our website.
-              Physical gift cards are available in our retail locations.
-            </p>
-          </div>
-        </div>
-      </section>
+      {<AccordionQuestion questions={frequentlyAskedQuestions} />}
     </div>
   );
 };

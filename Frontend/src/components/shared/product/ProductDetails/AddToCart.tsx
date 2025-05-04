@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { useAppSelector } from "@/features/redux/hook";
 import { selectedUser } from "@/features/redux/features/auth/authSlice";
 import { useAddToCartMutation } from "@/features/redux/features/cart/cartApi";
+import addProductToLocalStorage from "@/utils/addProductToLocalStorage";
 
 type AddToCartProps = {
   product: TProduct;
@@ -35,7 +36,9 @@ const AddToCart = ({
   const handleAddToCart = () => {
     const cartItem = {
       productId: product._id,
-
+      productName: product.name,
+      productImage: product.images[0]?.cloudinaryUrl,
+      productDescription: product.description,
       quantity,
       size: selectedSize,
       color: {
@@ -54,8 +57,8 @@ const AddToCart = ({
     }
 
     if (!user?.email) {
-      toast.error("Please login to add items to your cart.");
-      console.log("User not logged in. Redirecting to login page.");
+      addProductToLocalStorage(cartItem);
+      toast.success("Item added to local storage cart!");
 
       return;
     }

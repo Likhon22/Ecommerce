@@ -22,7 +22,7 @@ const EButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const defaultStyles =
-      "bg-gray-950 text-white cursor-pointer transition hover:scale-105 duration-300";
+      "bg-gray-950 text-white cursor-pointer transition-all hover:scale-105 duration-300";
 
     const buttonStyle = cn(
       defaultStyles,
