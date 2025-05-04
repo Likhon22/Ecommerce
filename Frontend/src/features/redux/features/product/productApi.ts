@@ -1,5 +1,6 @@
-import { TQueryParam } from "@/types/global";
+import { TQueryParam, TResponse } from "@/types/global";
 import { baseApi } from "../../api/baseApi";
+import { TCreateProduct } from "@/types/products";
 
 const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,7 +12,10 @@ const productApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["product"],
     }),
-    getProducts: builder.query({
+    getProducts: builder.query<
+      TResponse<TCreateProduct[]>,
+      TQueryParam[] | undefined
+    >({
       query: (args) => {
         const params = new URLSearchParams();
         if (args) {
@@ -28,7 +32,7 @@ const productApi = baseApi.injectEndpoints({
       },
       providesTags: ["product"],
     }),
-    getSingleProduct: builder.query({
+    getSingleProduct: builder.query<TResponse<TCreateProduct>, string>({
       query: (productId: string) => ({
         url: `/product/${productId}`,
         method: "GET",

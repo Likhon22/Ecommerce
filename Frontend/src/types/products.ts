@@ -1,5 +1,4 @@
-export type TProduct = {
-  _id: string;
+export type TCreateProduct = {
   name: string;
   description: string;
   price: number;
