@@ -17,6 +17,7 @@ const Cart = () => {
   const { data: cart, isLoading } = useGetCartQuery(user?.email as string, {
     skip: !user?.email,
   });
+  console.log(cart);
 
   useEffect(() => {
     if (!user?.email) {
@@ -33,7 +34,7 @@ const Cart = () => {
   }, [user]);
   console.log(localStorageCartItem);
 
-  if (!cart?.data?.length && !localStorageCartItem?.length) {
+  if (!cart?.data?.items?.length && !localStorageCartItem?.length) {
     return (
       <EmptyView
         heading="Your cart is empty"
@@ -57,7 +58,7 @@ const Cart = () => {
         {user?.email ? (
           <ProductTable
             caption="Recent Orders"
-            items={cart?.data}
+            items={cart?.data?.items}
             tableHead={[
               { header: "Product Name", field: "productName" },
               { header: "Image", field: "productImage" },
