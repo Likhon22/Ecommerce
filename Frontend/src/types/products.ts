@@ -1,4 +1,5 @@
 export type TCreateProduct = {
+  _id: string;
   name: string;
   description: string;
   price: number;

@@ -34,7 +34,11 @@ const Cart = () => {
   }, [user]);
   console.log(localStorageCartItem);
 
-  if (!cart?.data?.items?.length && !localStorageCartItem?.length) {
+  if (
+    !cart?.data?.items?.length &&
+    !localStorageCartItem?.length &&
+    !isLoading
+  ) {
     return (
       <EmptyView
         heading="Your cart is empty"
@@ -45,8 +49,8 @@ const Cart = () => {
   }
   return (
     <div className="min-h-screen my-12">
+      {isLoading && <Spinner />}
       <Container>
-        {isLoading && <Spinner />}
         <div>
           <HeadingSection
             className="mb-8"

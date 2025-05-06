@@ -2,7 +2,7 @@ import React from "react";
 
 export type TQueryParam = {
   name: string;
-  value: boolean | React.Key;
+  value: boolean | React.Key | string;
 };
 export type TMeta = {
   page: number;

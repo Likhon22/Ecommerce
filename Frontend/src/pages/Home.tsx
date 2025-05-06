@@ -1,13 +1,23 @@
-import CategorySection from "@/components/Home/categorySection/CategorySection";
 import Hero from "@/components/Home/Hero/Hero";
-import LatestCollection from "@/components/Home/latestCollection/LatestCollection";
+import LazyLoader from "@/components/shared/lazyLoader/LazyLoader";
+import { lazy } from "react";
+const LatestCollection = lazy(
+  () => import("@/components/Home/latestCollection/LatestCollection")
+);
+const CategorySection = lazy(
+  () => import("@/components/Home/categorySection/CategorySection")
+);
 
 const Home = () => {
   return (
     <div>
       <Hero />
-      <LatestCollection />
-      <CategorySection />
+      <LazyLoader>
+        <LatestCollection />
+      </LazyLoader>
+      <LazyLoader>
+        <CategorySection />
+      </LazyLoader>
     </div>
   );
 };

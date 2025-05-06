@@ -1,7 +1,10 @@
-import { TProduct } from "@/types/products";
+import { TCreateProduct } from "@/types/products";
 import ProductCard from "./ProductCard";
 
-const ProductGrid = ({ products }: { products: TProduct[] }) => {
+type TProductGridProps = {
+  products: TCreateProduct[];
+};
+const ProductGrid = ({ products }: TProductGridProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {products &&

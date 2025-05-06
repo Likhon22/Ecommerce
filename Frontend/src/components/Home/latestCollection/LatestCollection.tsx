@@ -2,16 +2,17 @@ import HeadingSection from "@/components/shared/headingSection/HeadingSection";
 import Container from "@/components/shared/layout/container/Container";
 
 import ProductGrid from "@/components/shared/product/ProductGrid";
+import InlineSpinner from "@/components/ui/InlineSpinner";
 
 import { useGetProductsQuery } from "@/features/redux/features/product/productApi";
-import { TProduct } from "@/types/products";
 
 const LatestCollection = () => {
-  const { data } = useGetProductsQuery(undefined);
-  const product: TProduct[] = data?.data;
+  const { data, isLoading } = useGetProductsQuery(undefined);
+  const product = data?.data;
 
   return (
     <Container>
+      {isLoading && <InlineSpinner />}
       <div className="my-12 flex flex-col gap-8">
         <HeadingSection
           firstText="LATEST"
@@ -19,7 +20,9 @@ const LatestCollection = () => {
           subSectionText="Discover our new styles for the season"
         />
 
-        <ProductGrid products={product} />
+        {product && product?.length > 0 && (
+          <ProductGrid products={product?.slice(0, 6)} />
+        )}
       </div>
     </Container>
   );

@@ -9,6 +9,7 @@ import ESort from "@/components/ui/ESort";
 import Spinner from "@/components/ui/Spinner";
 import { sortConstants } from "@/constants/query";
 import { useGetProductsQuery } from "@/features/redux/features/product/productApi";
+import { TQueryParam } from "@/types/global";
 
 import { useState } from "react";
 
@@ -46,7 +47,7 @@ const Collection = () => {
         name: "price",
         value: priceRange.map((item) => item.toString()).join(","),
       },
-    ].filter(Boolean)
+    ].filter(Boolean) as TQueryParam[]
   );
 
   if (products?.data?.length === 0 && !isLoading) {
