@@ -10,4 +10,6 @@ router.post(
   validateRequest(cartValidations.cartProductValidationSchema),
   cartControllers.createCart,
 );
+router.get('/:email', cartControllers.getCart);
+router.delete('/:email', cartControllers.deleteCart);
 export const cartRoutes = router;

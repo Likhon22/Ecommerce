@@ -5,6 +5,7 @@ import Product from '../product/product.model';
 
 import Cart from './cart.model';
 import cartValidations from './cart.validation';
+import { TCartProduct } from './cart.interface';
 
 const createCartIntoDB = async (
   payload: z.infer<typeof cartValidations.cartProductValidationSchema>['body'],
@@ -56,9 +57,44 @@ const createCartIntoDB = async (
 
   return cart;
 };
+const getCartFromDB = async (email: string) => {
+  const cart = await Cart.findOne({ email });
+  console.log(cart);
 
+  if (!cart) {
+    throw new ApiError(404, 'Cart not found');
+  }
+  return cart;
+};
+
+const deleteCartFromDB = async (
+  email: string,
+  payload: Pick<TCartProduct, 'productId' | 'color' | 'size'>,
+) => {
+  const cart = await Cart.findOne({ email });
+
+  if (!cart) {
+    throw new ApiError(404, 'Cart not found');
+  }
+  const newCart = await Cart.updateOne(
+    { email },
+    {
+      $pull: {
+        items: {
+          productId: payload.productId,
+          size: payload.size,
+          'color.hex': payload.color.hex,
+        },
+      },
+    },
+  );
+
+  return newCart;
+};
 const cartServices = {
   createCartIntoDB,
+  getCartFromDB,
+  deleteCartFromDB,
 };
 
 export default cartServices;
