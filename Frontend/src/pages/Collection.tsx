@@ -10,6 +10,8 @@ import Spinner from "@/components/ui/Spinner";
 import { sortConstants } from "@/constants/query";
 import { useGetProductsQuery } from "@/features/redux/features/product/productApi";
 import { TQueryParam } from "@/types/global";
+import { TCreateProduct } from "@/types/products";
+import { ShoppingBag } from "lucide-react";
 
 import { useState } from "react";
 
@@ -49,14 +51,13 @@ const Collection = () => {
       },
     ].filter(Boolean) as TQueryParam[]
   );
-
+  const productData = products?.data as TCreateProduct[];
   if (products?.data?.length === 0 && !isLoading) {
     return (
       <EmptyView
         heading="No products found"
         description="Looks like we couldn't find any products matching your criteria."
-        button="Start Shopping"
-        link="/collection"
+        icon={<ShoppingBag />}
       />
     );
   }
@@ -98,7 +99,7 @@ const Collection = () => {
             </div>
           </div>
           <div className="mt-6">
-            <ProductGrid products={products?.data} />
+            <ProductGrid products={productData} />
           </div>
         </div>
       </div>

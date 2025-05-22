@@ -44,3 +44,5 @@ export const subCategoryOptions = [
   "blazers",
   "coats",
 ];
+
+export const shippingFee = 5.99;

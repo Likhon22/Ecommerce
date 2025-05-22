@@ -101,7 +101,7 @@ const AddToCart = ({
           text="Add to Cart"
           fullWidth
           onClick={handleAddToCart}
-          disabled={!selectedSize || !selectedColor || product.stock <= 0}
+          disabled={!selectedSize || !selectedColor?.hex || product.stock <= 0}
         />
       </div>
     </div>

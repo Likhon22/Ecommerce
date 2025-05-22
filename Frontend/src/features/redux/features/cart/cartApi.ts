@@ -1,3 +1,4 @@
+import { TCartProduct } from "@/types/cart";
 import { baseApi } from "../../api/baseApi";
 
 const cartApi = baseApi.injectEndpoints({
@@ -7,6 +8,7 @@ const cartApi = baseApi.injectEndpoints({
         url: `/cart/${email}`,
         method: "GET",
       }),
+      providesTags: ["cart"],
     }),
     addToCart: builder.mutation({
       query: (item) => ({
@@ -14,8 +16,24 @@ const cartApi = baseApi.injectEndpoints({
         method: "POST",
         body: item,
       }),
+      invalidatesTags: ["cart"],
+    }),
+    deleteCart: builder.mutation({
+      query: ({
+        email,
+        payload,
+      }: {
+        email: string;
+        payload: Pick<TCartProduct, "productId" | "color" | "size">;
+      }) => ({
+        url: `/cart/${email}`,
+        method: "DELETE",
+        body: payload,
+      }),
+      invalidatesTags: ["cart"],
     }),
   }),
 });
 
-export const { useGetCartQuery, useAddToCartMutation } = cartApi;
+export const { useDeleteCartMutation, useGetCartQuery, useAddToCartMutation } =
+  cartApi;

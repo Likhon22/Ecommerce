@@ -30,7 +30,7 @@ const EFiltersSidebar = ({
   };
 
   return (
-    <div className="bg-secondary w-full static h-full px-4">
+    <div className="bg-white w-full  static h-full px-4">
       <div className="flex items-center justify-between  py-2 border-b border-border">
         <h1 className="text-lg font-semibold">Filters</h1>
         <EButton

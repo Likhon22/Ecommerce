@@ -11,6 +11,7 @@ import Login from "@/pages/Login";
 import { TRoutes } from "@/types/routes";
 import Product from "@/pages/Product";
 import Register from "@/pages/Register";
+import Checkout from "@/pages/Checkout";
 
 export const mainLayoutRoutes: TRoutes[] = [
   {
@@ -42,6 +43,11 @@ export const mainLayoutRoutes: TRoutes[] = [
     name: "Cart",
     path: "/cart",
     element: <Cart />,
+  },
+  {
+    name: "Checkout",
+    path: "/checkout",
+    element: <Checkout />,
   },
   {
     name: "Dashboard",
@@ -81,5 +87,6 @@ export const mainLayoutRoutesWithoutLogin = mainLayoutRoutes.filter(
   (item) =>
     item.path !== "/login" &&
     item.path !== "/product/:productId" &&
-    item.path !== "/register"
+    item.path !== "/register" &&
+    item.path !== "/checkout"
 );

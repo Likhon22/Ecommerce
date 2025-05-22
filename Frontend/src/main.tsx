@@ -9,7 +9,7 @@ import { persistor, store } from "./features/redux/store.ts";
 import { Toaster } from "sonner";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           {" "}

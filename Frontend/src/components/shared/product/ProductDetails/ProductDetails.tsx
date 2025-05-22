@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TColor, TProduct } from "@/types/products";
+import { TColor, TCreateProduct } from "@/types/products";
 import ProductImages from "./ProductImages";
 import ProductInfo from "./ProductInfo";
 import ColorSelector from "./ColorSelector";
@@ -7,7 +7,7 @@ import SizeSelector from "./SizeSelector";
 import AddToCart from "./AddToCart";
 
 type ProductDetailsProps = {
-  product: TProduct;
+  product: TCreateProduct;
 };
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {

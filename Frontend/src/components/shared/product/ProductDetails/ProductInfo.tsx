@@ -1,8 +1,8 @@
 import { currency } from "@/constants/product";
-import { TProduct } from "@/types/products";
+import { TCreateProduct } from "@/types/products";
 
 type ProductInfoProps = {
-  product: TProduct;
+  product: TCreateProduct;
 };
 
 const ProductInfo = ({ product }: ProductInfoProps) => {
